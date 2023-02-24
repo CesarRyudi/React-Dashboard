@@ -17,14 +17,13 @@ import  TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import  MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import  MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import { fontWeight } from "@mui/system";
-import LightModeOutlined from "@mui/icons-material/LightModeOutlined";
 
 
 const Item = ({title, to, icon, selected, setSelected }) => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
     return (
-        <MenuItem actiive={selected === title} style={{ color: colors.grey[100]}} onClick={() => setSelected(title)} icon={icon}>
+        <MenuItem active={selected === title} style={{ color: colors.grey[100]}} onClick={() => setSelected(title)} icon={icon}>
 
         <Typography>{title}</Typography>
         <Link to={to}/>
@@ -109,7 +108,7 @@ const Sidebar = () => {
                         <Typography variant="h6" color={colors.grey[300]} sx={{m: "15px 0 5px 20px" }}>Data</Typography>
 
                         <Item title="Manage Team" 
-                        to="/teamm" 
+                        to="/team" 
                         icon={<PeopleOutlinedIcon />}
                         selected={selected}
                         setSelected={setSelected}
