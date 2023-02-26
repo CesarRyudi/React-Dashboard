@@ -17,6 +17,8 @@ import  MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 // import  HelpOutlinedIcon from "@mui/icons-material/HelpOutlined";
 // import  BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
 
+// import user from "../../../public/assets/user.png";
+
 
 const Item = ({title, to, icon, selected, setSelected }) => {
     const theme = useTheme();
