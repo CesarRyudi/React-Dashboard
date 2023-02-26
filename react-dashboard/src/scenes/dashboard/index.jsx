@@ -10,8 +10,6 @@ import PointOfSaleIcon from "@mui/icons-material/PointOfSale"
 import LineChart from "../../components/LineChart"; 
 import PieChart from "../../components/PieChart";
 import StatBox from "../../components/StatBox";
-import ProgressCircle from "../../components/ProgressCircle";
-import { fontWeight } from "@mui/system";
 
 const Dashboard = () => {
     const theme = useTheme();
@@ -122,7 +120,7 @@ const Dashboard = () => {
 
                 {/* ROW 2 */}
                 <Box
-                gridColumn="span 8"
+                gridColumn="span 7"
                 gridRow="span 2"
                 backgroundColor={colors.primary[400]}
                 >
@@ -156,9 +154,40 @@ const Dashboard = () => {
                         <LineChart isDashboard={true} />
                     </Box>
             </Box>    
+            {/* Pie Chart */}
+             <Box
+                gridColumn="span 5"
+                gridRow="span 2"
+                backgroundColor={colors.primary[400]}
+                >
+                    <Box
+                    mt="25px"
+                    p="0 30px"
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    >
+                        <Box>
+                            <Typography variant="h4" fontWeight="600" color={colors.grey[100]}>
+                            Pie chart example   
+                            </Typography>
+                        </Box>
+                        <Box>
+                            <IconButton>
+                                <DownloadOutlinedIcon 
+                                sx={{ fontSize: "26px", color: colors.greenAccent[500] }}
+                                />
+                            </IconButton>
+                        </Box>
+                    </Box>
+
+                    <Box height="250px" mt="-20px">
+                        <PieChart isDashboard={true} />
+                    </Box>
+            </Box>
             {/* Transactiions  */}
             <Box 
-            gridColumn="span 4"
+            gridColumn="span 12"
             gridRow="span 2"
             backgroundColor={colors.primary[400]}
             overflow="auto"
@@ -218,6 +247,7 @@ const Dashboard = () => {
 
                 ))}
             </Box>
+
         </Box>
     </Box>
 
