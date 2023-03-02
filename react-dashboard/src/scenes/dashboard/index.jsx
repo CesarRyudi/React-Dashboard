@@ -188,7 +188,7 @@ const Dashboard = () => {
             {/* Transactiions  */}
             <Box 
             gridColumn="span 12"
-            gridRow="span 2"
+            gridRow="span 1"
             backgroundColor={colors.primary[400]}
             overflow="auto"
             >
