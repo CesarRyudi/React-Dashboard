@@ -1,28 +1,29 @@
-import { Box, Button, TextField  } from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
 import { Formik } from "formik";
 import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
+import  SearchIcon from "@mui/icons-material/Search";
  
 const initialValues = {
-    firstName: "",
-    lastName: "",
-    email: "",
-    contact: "",
-    address1: "",
-    address2: "",
+    nome: "",
+    cep: "",
+    cidade: "",
+    estado: "",
+    logradouro: "",
+    numero: "",
 };
 
-const phoneRegExp = /^\s*(\d{2}|\d{0})[-. ]?(\d{5}|\d{4})[-. ]?(\d{4})[-. ]?\s*$/gm
+const cepReg = /^\s*(\d{2}|\d{0})[-. ]?(\d{5}|\d{4})[-. ]?(\d{4})[-. ]?\s*$/gm
 
 
 const userSchema = yup.object().shape({
-    firstName: yup.string().required("required"),
-    lastName: yup.string().required("required"),
-    email: yup.string().email("Invalid email").required("required"),
-    contact: yup.string().matches(phoneRegExp, "Phone number is not valid").required("required"),
-    address1: yup.string().required("required"),
-    address2: yup.string()
+    nome: yup.string().required("Obrigatório"),
+    cep: yup.string().matches(cepReg, "Formato de CEP inválido").required("Obrigatório"),
+    cidade: yup.string().required("Obrigatório"),
+    estado: yup.string().required("Obrigatório"),
+    logradouro: yup.string().required("Obrigatório"),
+    numero: yup.string().required("Obrigatório"),
 });
 
 
@@ -31,11 +32,25 @@ const Form = () => {
 
     const handleFormSubmit = (values) => {
         console.log(values);
+
+        const dataToSend = JSON.stringify(values);
+        // fetch(, {
+            fetch('https://echo.zuplo.io/', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: dataToSend
+            })
+            .then(response => response.json())
+            .then(response => console.log(JSON.stringify(response)))
+            
     }
 
     return (
         <Box m="20px">
-            <Header title="CREATE USER" subtitle="Create a New User Profile"/>
+            <Header title="CADASTRO" subtitle="Cadastre um novo local"/>
         
         <Formik
           onSubmit={handleFormSubmit}
@@ -46,103 +61,119 @@ const Form = () => {
                 <form onSubmit={handleSubmit}>
                     <Box 
                      display="grid" 
-                     gap="30px" 
-                     gridTemplateColumns="repeat(4, minmax(0, 1fr))"
+                     gap="15px" 
+                     gridTemplateColumns="repeat(16, minmax(0, 1fr))"
                      sx={{
                         "& > div": {gridColumn: isNonMobile ?undefined : "span 4"},
                      }}
                      >
                         <TextField 
                          fullWidth
+                         gap="2px"
                          variant="filled"
                          type="text"
-                         label="First Name"
+                         label="Nome do Local (Apelido)"
                          onBlur={handleBlur}
                          onChange={handleChange}
-                         value={values.firstName}
-                         name="firstName"
-                         error={!!touched.firstName && !!errors.firstName}
-                         helperText={touched.firstName && errors.firstName}
+                         value={values.nome}
+                         name="nome"
+                         error={!!touched.nome && !!errors.nome}
+                         helperText={touched.nome && errors.nome}
+                         sx={{ gridColumn: "span 16"}}
+                         />
+                         
+                        <TextField 
+                         gap="2px"
+                         fullWidth
+                         variant="filled"
+                         type="text"
+                         label="CEP"
+                         onBlur={handleBlur}
+                         onChange={handleChange}
+                         value={values.cep}
+                         name="cep"
+                         error={!!touched.cep && !!errors.cep}
+                         helperText={touched.cep && errors.cep}
+                         sx={{ gridColumn: "span 5"}}
+                         />
+
+                         <Button 
+                         type="button"  
+                         color="secondary" 
+                         variant = "contained"
+                         sx={{ gridColumn: "span 1", margin:"0px 0px 0px -10px", height:"56px"}}
+                         >
+                          <SearchIcon />  
+                        </Button>
+
+                        <TextField 
+                         fullWidth
+                         variant="filled"
+                         type="text"
+                         label="Cidade"
+                         onBlur={handleBlur}
+                         onChange={handleChange}
+                         value={values.cidade}
+                         name="cidade"
+                         error={!!touched.cidade && !!errors.cidade}
+                         helperText={touched.cidade && errors.cidade}
+                         sx={{ gridColumn: "span 8"}}
+                         />
+                         
+                        <TextField 
+                         fullWidth
+                         variant="filled"
+                         type="text"
+                         label="UF"
+                         onBlur={handleBlur}
+                         onChange={handleChange}
+                         value={values.estado}
+                         name="estado"
+                         error={!!touched.estado && !!errors.estado}
+                         helperText={touched.estado && errors.estado}
                          sx={{ gridColumn: "span 2"}}
                          />
-                         
-                        <TextField 
+
+                         <TextField 
                          fullWidth
                          variant="filled"
                          type="text"
-                         label="Last Name"
+                         label="Logradouro"
                          onBlur={handleBlur}
                          onChange={handleChange}
-                         value={values.lastName}
-                         name="lastName"
-                         error={!!touched.lastName && !!errors.lastName}
-                         helperText={touched.lastName && errors.lastName}
-                         sx={{ gridColumn: "span 2"}}
+                         value={values.logradouro}
+                         name="logradouro"
+                         error={!!touched.logradouro && !!errors.logradouro}
+                         helperText={touched.logradouro && errors.logradouro}
+                         sx={{ gridColumn: "span 10"}}
                          />
-                         
-                        <TextField 
+
+                         <TextField 
                          fullWidth
                          variant="filled"
                          type="text"
-                         label="Email"
+                         label="Número"
                          onBlur={handleBlur}
                          onChange={handleChange}
-                         value={values.email}
-                         name="email"
-                         error={!!touched.email && !!errors.email}
-                         helperText={touched.email && errors.email}
-                         sx={{ gridColumn: "span 4"}}
+                         value={values.numero}
+                         name="numero"
+                         error={!!touched.numero && !!errors.numero}
+                         helperText={touched.numero && errors.numero}
+                         sx={{ gridColumn: "span 6"}}
                          />
+
                          
-                        <TextField 
-                         fullWidth
-                         variant="filled"
-                         type="text"
-                         label="Contact Number"
-                         onBlur={handleBlur}
-                         onChange={handleChange}
-                         value={values.contact}
-                         name="contact"
-                         error={!!touched.contact && !!errors.contact}
-                         helperText={touched.contact && errors.contact}
-                         sx={{ gridColumn: "span 4"}}
-                         />
-                         
-                        <TextField 
-                         fullWidth
-                         variant="filled"
-                         type="text"
-                         label="Address 1"
-                         onBlur={handleBlur}
-                         onChange={handleChange}
-                         value={values.address1}
-                         name="address1"
-                         error={!!touched.address1 && !!errors.address1}
-                         helperText={touched.address1 && errors.address1}
-                         sx={{ gridColumn: "span 4"}}
-                         />
-                         
-                        <TextField 
-                         fullWidth
-                         variant="filled"
-                         type="text"
-                         label="Address 2 (optional)"
-                         onBlur={handleBlur}
-                         onChange={handleChange}
-                         value={values.address2}
-                         name="address2"
-                         error={!!touched.address2 && !!errors.address2}
-                         helperText={touched.address2 && errors.address2}
-                         sx={{ gridColumn: "span 4"}}
-                         />
+                    </Box>
+                        <Box 
+                        mt="20px"
+                         display="flex" 
+                         justifyContent="end" >
+                        <Button type="submit"  color="secondary" variant = "contained">
+                            Cadastrar Local
+                        </Button>
 
                     </Box>
                     
-                    <Box display="flex" justifyContent="end" mt="20px">
-                        <Button type="submit"  color="secondary" variant = "contained">
-                            Create New User
-                        </Button>
-                    </Box>
                 </form>
             )}
 

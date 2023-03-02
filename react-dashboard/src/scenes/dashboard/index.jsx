@@ -11,6 +11,7 @@ import LineChart from "../../components/LineChart";
 import PieChart from "../../components/PieChart";
 import StatBox from "../../components/StatBox";
 
+
 const Dashboard = () => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
