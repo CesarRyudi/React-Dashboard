@@ -5,7 +5,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
 import  SearchIcon from "@mui/icons-material/Search";
  
-const initialValues = {
+var initialValues = {
     nome: "",
     cep: "",
     cidade: "",
@@ -14,12 +14,9 @@ const initialValues = {
     numero: "",
 };
 
-const cepReg = /^\s*(\d{2}|\d{0})[-. ]?(\d{5}|\d{4})[-. ]?(\d{4})[-. ]?\s*$/gm
-
-
 const userSchema = yup.object().shape({
     nome: yup.string().required("Obrigatório"),
-    cep: yup.string().matches(cepReg, "Formato de CEP inválido").required("Obrigatório"),
+    cep: yup.string().required("Obrigatório"),
     cidade: yup.string().required("Obrigatório"),
     estado: yup.string().required("Obrigatório"),
     logradouro: yup.string().required("Obrigatório"),
@@ -30,12 +27,32 @@ const userSchema = yup.object().shape({
 const Form = () => {
     const isNonMobile = useMediaQuery("(min-width:600px)");
 
+    const handleCep = (valor, setFieldValue) => {
+        const url = `https://viacep.com.br/ws/${valor.replace(/[^0-9]/g, '')}/json` 
+        console.log(url)
+        fetch(url , {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                setFieldValue('cidade', data.localidade)
+                setFieldValue('estado', data.uf)
+                setFieldValue('logradouro', data.logradouro)
+            });
+
+
+
+    }
+
     const handleFormSubmit = (values) => {
         console.log(values);
 
         const dataToSend = JSON.stringify(values);
-        // fetch(, {
-            fetch('https://echo.zuplo.io/', {
+            fetch('http://192.168.1.199:8085/api/v1/cadastros/enderecos', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -45,7 +62,9 @@ const Form = () => {
             })
             .then(response => response.json())
             .then(response => console.log(JSON.stringify(response)))
-            
+
+
+        window.alert("Local cadastrado!")
     }
 
     return (
@@ -56,8 +75,9 @@ const Form = () => {
           onSubmit={handleFormSubmit}
           initialValues={initialValues}
           validationSchema={userSchema}
+          enablereinitialize={true}
           >
-            {({ values, errors, touched, handleBlur, handleChange, handleSubmit}) => (
+            {({ values, errors, touched, handleBlur, handleChange, handleSubmit, setFieldValue}) => (
                 <form onSubmit={handleSubmit}>
                     <Box 
                      display="grid" 
@@ -98,10 +118,11 @@ const Form = () => {
                          />
 
                          <Button 
+                         onClick={() => handleCep(values.cep, setFieldValue)}
                          type="button"  
                          color="secondary" 
                          variant = "contained"
-                         sx={{ gridColumn: "span 1", margin:"0px 0px 0px -10px", height:"56px"}}
+                         sx={{ gridColumn: "span 1", ml:"-10px", height:"56px"}}
                          >
                           <SearchIcon />  
                         </Button>
