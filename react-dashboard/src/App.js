@@ -18,12 +18,13 @@ import buscaData from "./Funcoes/BuscaData";
 
 
 
+
 function App() {
   const [theme, colorMode] = useMode();
 
-  buscaData();
+  const dados = buscaData()
 
-
+  console.log(dados)
 
   return (
     <ColorModeContext.Provider value={colorMode}>

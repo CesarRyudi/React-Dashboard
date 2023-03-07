@@ -4,7 +4,11 @@ import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
 import  SearchIcon from "@mui/icons-material/Search";
- 
+import urlLocal from "../../isHome";
+
+
+
+
 var initialValues = {
     nome: "",
     cep: "",
@@ -39,9 +43,13 @@ const Form = () => {
             })
             .then((response) => response.json())
             .then((data) => {
-                setFieldValue('cidade', data.localidade)
-                setFieldValue('estado', data.uf)
-                setFieldValue('logradouro', data.logradouro)
+                if(data.erro) window.alert("CEP não encontrado");
+                else{
+                    setFieldValue('cidade', data.localidade)
+                    setFieldValue('estado', data.uf)
+                    setFieldValue('logradouro', data.logradouro)
+                    .then(response => console.log(JSON.stringify(response)))
+                }
             });
 
 
@@ -49,10 +57,12 @@ const Form = () => {
     }
 
     const handleFormSubmit = (values) => {
-        console.log(values);
-
         const dataToSend = JSON.stringify(values);
-            fetch('http://192.168.1.199:8085/api/v1/cadastros/enderecos', {
+        const urlCadastro = `${urlLocal}api/v1/cadastros/enderecos`
+       
+        
+
+            fetch(urlCadastro , {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -62,9 +72,8 @@ const Form = () => {
             })
             .then(response => response.json())
             .then(response => console.log(JSON.stringify(response)))
-
-
-        window.alert("Local cadastrado!")
+         
+        
     }
 
     return (
@@ -122,7 +131,7 @@ const Form = () => {
                          type="button"  
                          color="secondary" 
                          variant = "contained"
-                         sx={{ gridColumn: "span 1", ml:"-10px", height:"56px"}}
+                         sx={{ gridColumn: "span 1", ml:"-10px", height:"56px", width:""}}
                          >
                           <SearchIcon />  
                         </Button>

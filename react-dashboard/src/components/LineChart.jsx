@@ -1,7 +1,7 @@
 import { ResponsiveLine } from '@nivo/line'
 import { useTheme } from '@mui/material'; 
 import { tokens } from '../theme';
-import { mockLineData as data } from '../data/MockData';
+import { dados as data } from '../data/MockData';
 
 
 const LineChart = () => {
@@ -55,7 +55,7 @@ const LineChart = () => {
             type: 'linear',
             min: 'auto',
             max: 'auto',
-            stacked: true,
+            stacked: false,
             reverse: false
         }}
         yFormat=" >-.2f"
