@@ -8,6 +8,7 @@ import  NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutline
 import  SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import  PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import  SearchIcon from "@mui/icons-material/Search";
+import DateRangePickerComp from "../../components/DateRangePicker";
 
 
 const Topbar = () => {
@@ -16,15 +17,13 @@ const Topbar = () => {
     const colorMode = useContext(ColorModeContext);
 
     return ( 
-    <Box display="flex" justifyContent="right" p={2} mb="-50px">
+    <Box display="flex" justifyContent="space-between" p={2} mb="-20px">
         {/* Search Bar */}
-        {/* <Box display="flex" backgroundColor={colors.primary[400]} borderRadius="3px">
+        <Box display="flex" backgroundColor={colors.primary[400]} borderRadius="6px">
 
-            <InputBase sx={{ ml:2, flex:1 }} placeholder="Search" />
-            <IconButton type="button" sx={{ p:1 }}>
-                <SearchIcon />
-            </IconButton>
-        </Box> */}
+            
+             <DateRangePickerComp sx={{ ml:2, flex:1 }} />
+        </Box>
 
         {/* ICONS */}
         <Box display="flex" >

@@ -117,7 +117,7 @@ const Form = () => {
                          variant="filled"
                          type="text"
                          label="CEP"
-                         onBlur={handleBlur}
+                         onBlur={() => handleCep(values.cep, setFieldValue)}
                          onChange={handleChange}
                          value={values.cep}
                          name="cep"

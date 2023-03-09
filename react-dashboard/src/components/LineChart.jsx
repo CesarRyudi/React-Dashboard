@@ -1,15 +1,21 @@
 import { ResponsiveLine } from '@nivo/line'
+import React, {useCallback} from 'react';
 import { useTheme } from '@mui/material'; 
 import { tokens } from '../theme';
 import { dados as data } from '../data/MockData';
+import { useNavigate as navigate } from 'react-router-dom';
 
 
 const LineChart = () => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
 
+    const handleOnClick = useCallback(() => navigate('/sample', {replace: true}), [navigate]);
+    
+    
     return (
         <ResponsiveLine
+        onClick={handleOnClick}
         data={data}
         theme={{
             tooltip: {
