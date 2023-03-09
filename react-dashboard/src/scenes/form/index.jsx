@@ -32,6 +32,7 @@ const Form = () => {
     const isNonMobile = useMediaQuery("(min-width:600px)");
 
     const handleCep = (valor, setFieldValue) => {
+
         const url = `https://viacep.com.br/ws/${valor.replace(/[^0-9]/g, '')}/json` 
         console.log(url)
         fetch(url , {
@@ -52,15 +53,11 @@ const Form = () => {
                 }
             });
 
-
-
     }
 
     const handleFormSubmit = (values) => {
         const dataToSend = JSON.stringify(values);
         const urlCadastro = `${urlLocal}api/v1/cadastros/enderecos`
-       
-        
 
             fetch(urlCadastro , {
                 method: 'POST',

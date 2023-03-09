@@ -40,7 +40,7 @@ const Dashboard = () => {
             gap="20px"
             mt="8px"
             >
-                {/* ROW 1 */}
+                {/* ROW 1
                 <Box 
                 gridColumn="span 3" 
                 backgroundColor={colors.primary[400]} 
@@ -117,7 +117,7 @@ const Dashboard = () => {
                         sx={{ color: colors.greenAccent[600], fontSiize: "26px" }}/>
                     }
                     />
-                </Box>
+                </Box> */}
 
                 {/* ROW 2 */}
                 <Box
