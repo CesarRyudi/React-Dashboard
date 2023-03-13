@@ -11,6 +11,7 @@ import LineChart from "../../components/LineChart";
 import PieChart from "../../components/PieChart";
 import StatBox from "../../components/StatBox";
 
+
 const Dashboard = () => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
@@ -39,7 +40,7 @@ const Dashboard = () => {
             gap="20px"
             mt="8px"
             >
-                {/* ROW 1 */}
+                {/* ROW 1
                 <Box 
                 gridColumn="span 3" 
                 backgroundColor={colors.primary[400]} 
@@ -116,7 +117,7 @@ const Dashboard = () => {
                         sx={{ color: colors.greenAccent[600], fontSiize: "26px" }}/>
                     }
                     />
-                </Box>
+                </Box> */}
 
                 {/* ROW 2 */}
                 <Box
@@ -188,7 +189,7 @@ const Dashboard = () => {
             {/* Transactiions  */}
             <Box 
             gridColumn="span 12"
-            gridRow="span 2"
+            gridRow="span 1"
             backgroundColor={colors.primary[400]}
             overflow="auto"
             >
