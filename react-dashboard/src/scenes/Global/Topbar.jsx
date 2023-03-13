@@ -9,6 +9,8 @@ import  SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import  PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import  SearchIcon from "@mui/icons-material/Search";
 import DateRangePickerComp from "../../components/DateRangePicker";
+import BasicRangeShortcuts from "../../components/DateRangeMUI";
+import Calendario from "../../components/DateRangeRsuite";
 
 
 const Topbar = () => {
@@ -18,11 +20,12 @@ const Topbar = () => {
 
     return ( 
     <Box display="flex" justifyContent="space-between" p={2} mb="-20px">
-        {/* Search Bar */}
+        {/* Calendário */}
         <Box display="flex" backgroundColor={colors.primary[400]} borderRadius="6px">
-
             
-             <DateRangePickerComp sx={{ ml:2, flex:1 }} />
+             {/* <DateRangePickerComp sx={{ ml:2, flex:1 }} /> */}
+             {/* <BasicRangeShortcuts /> */}
+             <Calendario />
         </Box>
 
         {/* ICONS */}

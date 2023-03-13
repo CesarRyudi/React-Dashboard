@@ -7,8 +7,11 @@ import { useTheme } from '@mui/material';
 import  InputBase  from "@mui/material/InputBase";
 import * as locales from 'react-date-range/dist/locale';
 
+
 import './Style/styles.css'; 
 import './Style/default.css'; 
+
+
 
 
 const DateRangePickerComp = () => {
@@ -21,7 +24,8 @@ const DateRangePickerComp = () => {
             endDate: new Date(),
             color: colors.blueAccent[300],
             locale: 'Portuguese',
-            key: 'selection'
+            key: 'selection',
+        
         }
     ])
 
@@ -72,7 +76,7 @@ const DateRangePickerComp = () => {
         <div ref={refOne}>
 
         {open &&
-        <DateRangePicker 
+        <DateRangePicker
         //   style={{ background:"#3d91ff", color: colors.grey[100]}}
           onChange = { item => setRange([item.selection]) }
           editableDateInputs={true}
@@ -85,6 +89,17 @@ const DateRangePickerComp = () => {
           calendarFocus="backwards"
           className="calendarElement"
           locale = {locales.pt}
+          style = {{
+            fromDot: {backgroundColor: 'rgb(100, 0, 34)'},
+            toDot: {backgroundColor: 'rgb(0, 135, 255)'},
+            fromDate: {color: 'rgb(0, 255, 100)', backgroundColor: 'rgb(255, 100, 100)'},
+            toDate: {backgroundColor: 'rgb(40, 90, 75)'},
+            betweenDates: {color: 'rgb(200, 0, 34)', backgroundColor: 'rgb(200, 150, 100)'},
+            hoverCell: {color: 'rgb(200, 0, 34)'},
+            customRangeButtons: {backgroundColor: 'rgb(40, 90, 75)'},
+            customRangeSelected: {backgroundColor: 'rgb(100, 90, 200)'},
+            standaloneLayout:{display:'flex', maxWidth:'fit-content'}
+        }}
         />
         }
         </div>

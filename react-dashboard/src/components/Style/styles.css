@@ -1,3 +1,10 @@
+.datePicker {
+  width: 100%;
+  background-color: #fff !important;
+  color: #fff !important;
+}
+
+
 .rdrCalendarWrapper {
   box-sizing: border-box;
   background: #3e4396;

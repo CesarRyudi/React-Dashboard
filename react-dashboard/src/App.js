@@ -8,15 +8,13 @@ import Contacts from "./scenes/contacts";
 import Form from "./scenes/form";
 import Line from "./scenes/line";
 import Pie from "./scenes/pie";
-import buscaData from "./Funcoes/BuscaData";
 
 
 
 
 function App() {
   const [theme, colorMode] = useMode();
-  const dados = buscaData()
-  console.log(dados);
+
 
 
   return (

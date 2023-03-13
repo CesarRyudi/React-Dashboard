@@ -1,17 +1,62 @@
 import * as React from 'react';
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import { LocalizationProvider } from '@mui/x-date-pickers-pro';
-import { AdapterDayjs } from '@mui/x-date-pickers-pro/AdapterDayjs';
-import { DateRangePicker } from '@mui/x-date-pickers-pro/DateRangePicker';
-import format from "date-fns/format";
-import { addDays } from "date-fns";
+import dayjs from 'dayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { StaticDateRangePicker } from '@mui/x-date-pickers-pro/StaticDateRangePicker';
 
-export default function BasicDateRangePicker() {
+const shortcutsItems = [
+  {
+    label: 'This Week',
+    getValue: () => {
+      const today = dayjs();
+      return [today.startOf('week'), today.endOf('week')];
+    },
+  },
+  {
+    label: 'Last Week',
+    getValue: () => {
+      const today = dayjs();
+      const prevWeek = today.subtract(7, 'day');
+      return [prevWeek.startOf('week'), prevWeek.endOf('week')];
+    },
+  },
+  {
+    label: 'Last 7 Days',
+    getValue: () => {
+      const today = dayjs();
+      return [today.subtract(7, 'day'), today];
+    },
+  },
+  {
+    label: 'Current Month',
+    getValue: () => {
+      const today = dayjs();
+      return [today.startOf('month'), today.endOf('month')];
+    },
+  },
+  {
+    label: 'Next Month',
+    getValue: () => {
+      const today = dayjs();
+      const startOfNextMonth = today.endOf('month').add(1, 'day');
+      return [startOfNextMonth, startOfNextMonth.endOf('month')];
+    },
+  },
+  { label: 'Reset', getValue: () => [null, null] },
+];
+
+export default function BasicRangeShortcuts() {
   return (
-    <LocalizationProvider dateAdapter={new Date()}>
-      <DemoContainer components={['DateRangePicker']}>
-        <DateRangePicker localeText={{ start: 'Check-in', end: 'Check-out' }} />
-      </DemoContainer>
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <StaticDateRangePicker
+        slotProps={{
+          shortcuts: {
+            items: shortcutsItems,
+          },
+          actionBar: { actions: [] },
+        }}
+        calendars={2}
+      />
     </LocalizationProvider>
   );
 }
